@@ -22,9 +22,8 @@ namespace StatisticsCollection.ViewModels
 
 			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
 			{
-				Item newItem = item as Item;
-				Items.Add(newItem);
-				await DataStore.AddItemAsync(newItem);
+				await DataStore.AddItemAsync(item);
+				LoadItemsCommand.Execute(null);
 			});
 		}
 
