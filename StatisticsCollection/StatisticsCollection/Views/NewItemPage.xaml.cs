@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StatisticsCollection.Models;
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using StatisticsCollection.Models;
 
 namespace StatisticsCollection.Views
 {
@@ -22,7 +19,7 @@ namespace StatisticsCollection.Views
 			Item = new Item
 			{
 				Text = "Item name",
-				Description = "This is an item description."
+				Date = DateTime.Now
 			};
 
 			BindingContext = this;

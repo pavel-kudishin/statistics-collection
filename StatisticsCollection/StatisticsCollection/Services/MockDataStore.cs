@@ -18,41 +18,36 @@ namespace StatisticsCollection.Services
 				{
 					Id = Guid.NewGuid().ToString(),
 					Text = "First item",
-					Description="This is an item description.",
 					Date = DateTime.Now.AddMonths(-1).AddDays(-2).AddHours(-3)
 				},
 				new Item
 				{
 					Id = Guid.NewGuid().ToString(),
 					Text = "Second item",
-					Description="This is an item description.",
 					Date = DateTime.Now.AddMonths(-2).AddDays(-2).AddHours(-6)
 				},
 				new Item
 				{
 					Id = Guid.NewGuid().ToString(),
-					Text = "Third item", Description="This is an item description.",
+					Text = "xxx item",
 					Date = DateTime.Now.AddMonths(-3).AddDays(-5).AddHours(-9)
 				},
 				new Item
 				{
 					Id = Guid.NewGuid().ToString(),
 					Text = "Fourth item",
-					Description="This is an item description.",
 					Date = DateTime.Now.AddMonths(-1).AddDays(-21).AddHours(-12)
 				},
 				new Item
 				{
 					Id = Guid.NewGuid().ToString(),
 					Text = "Fifth item",
-					Description="This is an item description.",
 					Date = DateTime.Now.AddMonths(-10).AddDays(-4).AddHours(-18)
 				},
 				new Item
 				{
 					Id = Guid.NewGuid().ToString(),
 					Text = "Sixth item",
-					Description="This is an item description.",
 					Date = DateTime.Now.AddMonths(-21).AddDays(-39).AddHours(-17)
 				}
 			};
@@ -89,7 +84,7 @@ namespace StatisticsCollection.Services
 
 		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
 		{
-			return await Task.FromResult(_items);
+			return await Task.FromResult(_items.OrderByDescending(i => i.Date));
 		}
 	}
 }

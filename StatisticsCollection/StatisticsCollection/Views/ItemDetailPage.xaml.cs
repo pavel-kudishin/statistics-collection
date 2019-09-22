@@ -1,10 +1,8 @@
-﻿using System;
+﻿using StatisticsCollection.Models;
+using StatisticsCollection.ViewModels;
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-using StatisticsCollection.Models;
-using StatisticsCollection.ViewModels;
 
 namespace StatisticsCollection.Views
 {
@@ -26,10 +24,10 @@ namespace StatisticsCollection.Views
 		{
 			InitializeComponent();
 
-			var item = new Item
+			Item item = new Item
 			{
 				Text = "Item 1",
-				Description = "This is an item description."
+				Date = DateTime.Now
 			};
 
 			viewModel = new ItemDetailViewModel(item);

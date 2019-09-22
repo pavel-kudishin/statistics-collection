@@ -11,14 +11,12 @@
 			 Title="{Binding Title}">
 
 	<StackLayout Spacing="20" Padding="15">
-		<Label Text="Дата:" FontSize="Medium" />
-		<DatePicker IsEnabled="False" Date="{Binding Item.Date}"></DatePicker>
-		<Label Text="Время:" FontSize="Medium" />
-		<TimePicker IsEnabled="False"></TimePicker>
+		<Label Text="{Binding Item.Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+				LineBreakMode="NoWrap"
+				Style="{DynamicResource ListItemTextStyle}"
+				FontSize="Medium" />
 		<Label Text="Text:" FontSize="Medium" />
-		<Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
-		<Label Text="Description:" FontSize="Medium" />
-		<Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+		<Label Text="{Binding Item.Text}" FontSize="Small"/>
 	</StackLayout>
 
 </ContentPage>
