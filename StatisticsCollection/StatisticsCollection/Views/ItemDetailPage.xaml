@@ -1,17 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="StatisticsCollection.Views.ItemDetailPage"
-             Title="{Binding Title}">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d1"
+			xmlns:d1="http://schemas.microsoft.com/expression/blend/2008"
+			xmlns:viewModels="clr-namespace:StatisticsCollection.ViewModels;assembly=StatisticsCollection"
+			d1:DataContext="{d1:DesignInstance viewModels:ItemDetailViewModel, IsDesignTimeCreatable=True}"
+			 x:Class="StatisticsCollection.Views.ItemDetailPage"
+			 Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
-    </StackLayout>
-    
+	<StackLayout Spacing="20" Padding="15">
+		<Label Text="Дата:" FontSize="Medium" />
+		<DatePicker IsEnabled="False" Date="{Binding Item.Date}"></DatePicker>
+		<Label Text="Время:" FontSize="Medium" />
+		<TimePicker IsEnabled="False"></TimePicker>
+		<Label Text="Text:" FontSize="Medium" />
+		<Label Text="{Binding Item.Text}" d:Text="Item name" FontSize="Small"/>
+		<Label Text="Description:" FontSize="Medium" />
+		<Label Text="{Binding Item.Description}" d:Text="Item description" FontSize="Small"/>
+	</StackLayout>
+
 </ContentPage>
