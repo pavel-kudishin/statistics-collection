@@ -1,8 +1,5 @@
-﻿using System;
+﻿using StatisticsCollection.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using StatisticsCollection.Services;
-using StatisticsCollection.Views;
 
 namespace StatisticsCollection
 {

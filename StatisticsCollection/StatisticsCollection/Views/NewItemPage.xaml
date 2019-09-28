@@ -24,12 +24,13 @@
 
 	<ContentPage.Content>
 		<StackLayout Spacing="20" Padding="15">
-			<Label Text="Дата:" FontSize="Medium" />
+			<Label Text="Дата:" FontSize="Medium" FontAttributes="Bold"/>
 			<DatePicker Date="{Binding Item.Date}"></DatePicker>
-			<Label Text="Время:" FontSize="Medium" />
+			<Label Text="Время:" FontSize="Medium" FontAttributes="Bold"/>
 			<TimePicker Time="{Binding Item.Time}" Format="HH:mm"></TimePicker>
-			<Label Text="Показатель:" FontSize="Medium" />
-			<Entry Text="{Binding Item.Value, Converter={StaticResource DecimalConverter}}" FontSize="Medium" Keyboard="Numeric" />
+			<Label Text="Показатель:" FontSize="Medium" FontAttributes="Bold"/>
+			<Entry Text="{Binding Item.Value, Converter={StaticResource DecimalConverter}}"
+					FontSize="Medium" Keyboard="Numeric" />
 		</StackLayout>
 	</ContentPage.Content>
 

@@ -39,6 +39,7 @@
 								FontSize="Medium" />
 							<Label
 								Text="{Binding Value}"
+								WidthRequest="150"
 								Style="{DynamicResource ListItemTextStyle}"
 								FontSize="Medium" />
 						</StackLayout>

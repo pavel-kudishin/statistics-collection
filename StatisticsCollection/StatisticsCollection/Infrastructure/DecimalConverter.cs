@@ -15,8 +15,7 @@ namespace StatisticsCollection.Infrastructure
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			decimal dec;
-			if (decimal.TryParse(value as string, out dec))
+			if (decimal.TryParse(value as string, out decimal dec))
 				return dec;
 			return value;
 		}
