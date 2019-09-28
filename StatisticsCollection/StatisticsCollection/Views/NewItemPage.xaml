@@ -6,9 +6,16 @@
 			mc:Ignorable="d1"
 			xmlns:d1="http://schemas.microsoft.com/expression/blend/2008"
 			xmlns:views="clr-namespace:StatisticsCollection.Views;assembly=StatisticsCollection"
+			xmlns:infrastructure="clr-namespace:StatisticsCollection.Infrastructure;assembly=StatisticsCollection"
 			d1:DataContext="{d1:DesignInstance views:NewItemPage, IsDesignTimeCreatable=True}"
 			 x:Class="StatisticsCollection.Views.NewItemPage"
 			 Title="New Item">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<infrastructure:DecimalConverter x:Key="DecimalConverter" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
 
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
@@ -22,7 +29,7 @@
 			<Label Text="Время:" FontSize="Medium" />
 			<TimePicker Time="{Binding Item.Time}" Format="HH:mm"></TimePicker>
 			<Label Text="Показатель:" FontSize="Medium" />
-			<Entry Text="{Binding Item.Value}" FontSize="Medium" Keyboard="Numeric" />
+			<Entry Text="{Binding Item.Value, Converter={StaticResource DecimalConverter}}" FontSize="Medium" Keyboard="Numeric" />
 		</StackLayout>
 	</ContentPage.Content>
 

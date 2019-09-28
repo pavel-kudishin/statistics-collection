@@ -18,7 +18,7 @@ namespace StatisticsCollection.Views
 
 			Item = new Item
 			{
-				Value = 0.0m,
+				Value = null,
 				Date = DateTime.Now
 			};
 

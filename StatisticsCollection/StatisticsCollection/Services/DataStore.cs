@@ -27,7 +27,7 @@ namespace StatisticsCollection.Services
 				StatisticsEntity statisticsEntity = new StatisticsEntity()
 				{
 					Date = item.Date,
-					Value = item.Value
+					Value = item.Value ?? 0
 				};
 				await connection.InsertAsync(statisticsEntity);
 			}
@@ -53,7 +53,7 @@ namespace StatisticsCollection.Services
 				}
 
 				statisticsEntity.Date = item.Date;
-				statisticsEntity.Value = item.Value;
+				statisticsEntity.Value = item.Value ?? 0;
 
 				await connection.UpdateAsync(statisticsEntity);
 			}

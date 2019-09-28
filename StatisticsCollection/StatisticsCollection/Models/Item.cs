@@ -8,7 +8,7 @@ namespace StatisticsCollection.Models
 	public class Item : INotifyPropertyChanged
 	{
 		private DateTime _date;
-		private decimal _value;
+		private decimal? _value;
 
 		public int Id { get; set; }
 
@@ -30,7 +30,7 @@ namespace StatisticsCollection.Models
 			set => Date = Date.Date.Add(value);
 		}
 
-		public decimal Value
+		public decimal? Value
 		{
 			get => _value;
 			set
