@@ -21,8 +21,8 @@
 			<DatePicker Date="{Binding Item.Date}"></DatePicker>
 			<Label Text="Время:" FontSize="Medium" />
 			<TimePicker Time="{Binding Item.Time}" Format="HH:mm"></TimePicker>
-			<Label Text="Text" FontSize="Medium" />
-			<Entry Text="{Binding Item.Value}" FontSize="Small" />
+			<Label Text="Показатель:" FontSize="Medium" />
+			<Entry Text="{Binding Item.Value}" FontSize="Medium" Keyboard="Numeric" />
 		</StackLayout>
 	</ContentPage.Content>
 

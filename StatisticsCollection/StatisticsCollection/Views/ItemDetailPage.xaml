@@ -11,12 +11,13 @@
 			 Title="{Binding Title}">
 
 	<StackLayout Spacing="20" Padding="15">
+		<Label Text="Дата:" FontSize="Medium" />
 		<Label Text="{Binding Item.Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
 				LineBreakMode="NoWrap"
 				Style="{DynamicResource ListItemTextStyle}"
 				FontSize="Medium" />
-		<Label Text="Text:" FontSize="Medium" />
-		<Label Text="{Binding Item.Value}" FontSize="Small"/>
+		<Label Text="Показатель:" FontSize="Medium" />
+		<Label Text="{Binding Item.Value}" FontSize="Medium"/>
 	</StackLayout>
 
 </ContentPage>

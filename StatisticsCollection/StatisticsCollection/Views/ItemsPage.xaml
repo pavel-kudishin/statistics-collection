@@ -28,15 +28,19 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
-						<StackLayout Padding="10">
-							<Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
-									LineBreakMode="NoWrap"
-									Style="{DynamicResource ListItemTextStyle}"
-									FontSize="16" />
-							<Label Text="{Binding Value}"
-									LineBreakMode="NoWrap"
-									Style="{DynamicResource ListItemTextStyle}"
-									FontSize="16" />
+						<StackLayout Padding="10" Orientation="Horizontal">
+							<Label
+								Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
+							<Label
+								Text="-"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
+							<Label
+								Text="{Binding Value}"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
 						</StackLayout>
 					</ViewCell>
 				</DataTemplate>
