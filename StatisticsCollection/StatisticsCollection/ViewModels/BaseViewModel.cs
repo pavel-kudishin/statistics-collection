@@ -10,7 +10,7 @@ namespace StatisticsCollection.ViewModels
 {
 	public class BaseViewModel : INotifyPropertyChanged
 	{
-		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
 		bool _isBusy = false;
 		public bool IsBusy

@@ -33,7 +33,7 @@
 									LineBreakMode="NoWrap"
 									Style="{DynamicResource ListItemTextStyle}"
 									FontSize="16" />
-							<Label Text="{Binding Text}"
+							<Label Text="{Binding Value}"
 									LineBreakMode="NoWrap"
 									Style="{DynamicResource ListItemTextStyle}"
 									FontSize="16" />

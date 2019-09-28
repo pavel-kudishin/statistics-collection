@@ -1,6 +1,4 @@
-﻿using System;
-
-using StatisticsCollection.Models;
+﻿using StatisticsCollection.Models;
 
 namespace StatisticsCollection.ViewModels
 {
@@ -10,7 +8,7 @@ namespace StatisticsCollection.ViewModels
 
 		public ItemDetailViewModel(Item item = null)
 		{
-			Title = item?.Text;
+			Title = item?.Date.ToString("G");
 			Item = item;
 		}
 	}

@@ -1,6 +1,9 @@
-﻿using StatisticsCollection.Models;
+﻿using SQLite;
+using StatisticsCollection.Entities;
+using StatisticsCollection.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,83 +11,128 @@ namespace StatisticsCollection.Services
 {
 	public class MockDataStore : IDataStore<Item>
 	{
-		private readonly List<Item> _items;
-
-		public MockDataStore()
+		private static async Task<SQLiteAsyncConnection> GetDatabaseConnection()
 		{
-			_items =  new List<Item>
-			{
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "First item",
-					Date = DateTime.Now.AddMonths(-1).AddDays(-2).AddHours(-3)
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "Second item",
-					Date = DateTime.Now.AddMonths(-2).AddDays(-2).AddHours(-6)
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "xxx item",
-					Date = DateTime.Now.AddMonths(-3).AddDays(-5).AddHours(-9)
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "Fourth item",
-					Date = DateTime.Now.AddMonths(-1).AddDays(-21).AddHours(-12)
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "Fifth item",
-					Date = DateTime.Now.AddMonths(-10).AddDays(-4).AddHours(-18)
-				},
-				new Item
-				{
-					Id = Guid.NewGuid().ToString(),
-					Text = "Sixth item",
-					Date = DateTime.Now.AddMonths(-21).AddDays(-39).AddHours(-17)
-				}
-			};
+			string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+			SQLiteAsyncConnection database = new SQLiteAsyncConnection(Path.Combine(folderPath, "stats.db3"));
+			CreateTableResult createTableResult = await database.CreateTableAsync<StatisticsEntity>();
+			return database;
 		}
 
 		public async Task<bool> AddItemAsync(Item item)
 		{
-			_items.Add(item);
+			SQLiteAsyncConnection connection = await GetDatabaseConnection();
+			try
+			{
+				StatisticsEntity statisticsEntity = new StatisticsEntity()
+				{
+					Date = item.Date,
+					Value = item.Value
+				};
+				await connection.InsertAsync(statisticsEntity);
+			}
+			finally
+			{
+				await connection.CloseAsync();
+			}
 
-			return await Task.FromResult(true);
+			return true;
 		}
 
 		public async Task<bool> UpdateItemAsync(Item item)
 		{
-			Item oldItem = _items.FirstOrDefault(arg => arg.Id == item.Id);
-			_items.Remove(oldItem);
-			_items.Add(item);
+			SQLiteAsyncConnection connection = await GetDatabaseConnection();
+			try
+			{
+				StatisticsEntity statisticsEntity = await connection.Table<StatisticsEntity>()
+					.FirstOrDefaultAsync(i => i.Id == item.Id);
 
-			return await Task.FromResult(true);
+				if (statisticsEntity == null)
+				{
+					return false;
+				}
+
+				statisticsEntity.Date = item.Date;
+				statisticsEntity.Value = item.Value;
+
+				await connection.UpdateAsync(statisticsEntity);
+			}
+			finally
+			{
+				await connection.CloseAsync();
+			}
+			return true;
 		}
 
-		public async Task<bool> DeleteItemAsync(string id)
+		public async Task<bool> DeleteItemAsync(int id)
 		{
-			Item oldItem = _items.FirstOrDefault(arg => arg.Id == id);
-			_items.Remove(oldItem);
+			SQLiteAsyncConnection connection = await GetDatabaseConnection();
+			try
+			{
+				StatisticsEntity statisticsEntity = await connection.Table<StatisticsEntity>()
+					.FirstOrDefaultAsync(i => i.Id == id);
 
-			return await Task.FromResult(true);
+				if (statisticsEntity == null)
+				{
+					return false;
+				}
+
+				await connection.DeleteAsync(statisticsEntity);
+			}
+			finally
+			{
+				await connection.CloseAsync();
+			}
+			return true;
 		}
 
-		public async Task<Item> GetItemAsync(string id)
+		public async Task<Item> GetItemAsync(int id)
 		{
-			return await Task.FromResult(_items.FirstOrDefault(s => s.Id == id));
+			SQLiteAsyncConnection connection = await GetDatabaseConnection();
+			try
+			{
+				StatisticsEntity statisticsEntity = await connection.Table<StatisticsEntity>()
+					.FirstOrDefaultAsync(i => i.Id == id);
+
+				if (statisticsEntity == null)
+				{
+					return null;
+				}
+
+				Item item = new Item()
+				{
+					Id = statisticsEntity.Id,
+					Date = statisticsEntity.Date,
+					Value = statisticsEntity.Value
+				};
+				return item;
+			}
+			finally
+			{
+				await connection.CloseAsync();
+			}
 		}
 
 		public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
 		{
-			return await Task.FromResult(_items.OrderByDescending(i => i.Date));
+			SQLiteAsyncConnection connection = await GetDatabaseConnection();
+			try
+			{
+				List<StatisticsEntity> statisticsEntities = await connection.Table<StatisticsEntity>()
+					.OrderByDescending(i => i.Date)
+					.ToListAsync();
+
+				return statisticsEntities.Select(s => new Item()
+				{
+					Id = s.Id,
+					Date = s.Date,
+					Value = s.Value
+				});
+			}
+			finally
+			{
+				await connection.CloseAsync();
+			}
 		}
 	}
 }

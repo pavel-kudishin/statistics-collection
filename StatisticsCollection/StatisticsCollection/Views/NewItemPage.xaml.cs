@@ -18,7 +18,7 @@ namespace StatisticsCollection.Views
 
 			Item = new Item
 			{
-				Text = "Item name",
+				Value = 0.0m,
 				Date = DateTime.Now
 			};
 

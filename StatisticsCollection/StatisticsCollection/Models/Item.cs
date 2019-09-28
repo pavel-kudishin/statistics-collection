@@ -8,9 +8,9 @@ namespace StatisticsCollection.Models
 	public class Item : INotifyPropertyChanged
 	{
 		private DateTime _date;
-		private string _text;
+		private decimal _value;
 
-		public string Id { get; set; }
+		public int Id { get; set; }
 
 		public DateTime Date
 		{
@@ -30,14 +30,14 @@ namespace StatisticsCollection.Models
 			set => Date = Date.Date.Add(value);
 		}
 
-		public string Text
+		public decimal Value
 		{
-			get => _text;
+			get => _value;
 			set
 			{
-				if (value == _text)
+				if (value == _value)
 					return;
-				_text = value;
+				_value = value;
 				OnPropertyChanged();
 			}
 		}

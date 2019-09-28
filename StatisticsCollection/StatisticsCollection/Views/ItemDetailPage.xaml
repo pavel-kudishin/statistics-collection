@@ -16,7 +16,7 @@
 				Style="{DynamicResource ListItemTextStyle}"
 				FontSize="Medium" />
 		<Label Text="Text:" FontSize="Medium" />
-		<Label Text="{Binding Item.Text}" FontSize="Small"/>
+		<Label Text="{Binding Item.Value}" FontSize="Small"/>
 	</StackLayout>
 
 </ContentPage>
