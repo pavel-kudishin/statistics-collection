@@ -12,14 +12,16 @@ namespace StatisticsCollection.ViewModels
 	{
 		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
-		bool _isBusy = false;
+		private bool _isBusy = false;
+		private string _title = string.Empty;
+
 		public bool IsBusy
 		{
 			get => _isBusy;
 			set => SetProperty(ref _isBusy, value);
 		}
 
-		string _title = string.Empty;
+
 		public string Title
 		{
 			get => _title;
@@ -41,6 +43,7 @@ namespace StatisticsCollection.ViewModels
 
 		#region INotifyPropertyChanged
 		public event PropertyChangedEventHandler PropertyChanged;
+
 		protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
 		{
 			PropertyChangedEventHandler changed = PropertyChanged;

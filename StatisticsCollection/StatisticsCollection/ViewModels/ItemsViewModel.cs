@@ -13,12 +13,15 @@ namespace StatisticsCollection.ViewModels
 	{
 		public ObservableCollection<Item> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
+		public Command DeleteItemCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Browse";
 			Items = new ObservableCollection<Item>();
+
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+			DeleteItemCommand = new Command(async item => await ExecuteDeleteItemCommand((Item)item));
 
 			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
 			{
@@ -27,7 +30,7 @@ namespace StatisticsCollection.ViewModels
 			});
 		}
 
-		async Task ExecuteLoadItemsCommand()
+		private async Task ExecuteLoadItemsCommand()
 		{
 			if (IsBusy)
 				return;
@@ -51,6 +54,29 @@ namespace StatisticsCollection.ViewModels
 			{
 				IsBusy = false;
 			}
+		}
+
+		private async Task ExecuteDeleteItemCommand(Item item)
+		{
+			if (IsBusy)
+				return;
+
+			IsBusy = true;
+
+			try
+			{
+				bool result = await DataStore.DeleteItemAsync(item.Id);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+
+			await ExecuteLoadItemsCommand();
 		}
 	}
 }

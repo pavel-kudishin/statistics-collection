@@ -28,6 +28,14 @@
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
+						<ViewCell.ContextActions>
+							<MenuItem Clicked="OnEdit"
+									CommandParameter="{Binding .}"
+									Text="Edit" />
+							<MenuItem Clicked="OnDelete"
+									CommandParameter="{Binding .}"
+									Text="Delete" IsDestructive="True" />
+						</ViewCell.ContextActions>
 						<StackLayout Padding="10" Orientation="Horizontal">
 							<Label
 								Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"

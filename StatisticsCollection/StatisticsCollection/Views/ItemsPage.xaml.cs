@@ -11,7 +11,7 @@ namespace StatisticsCollection.Views
 	[DesignTimeVisible(false)]
 	public partial class ItemsPage : ContentPage
 	{
-		readonly ItemsViewModel _viewModel;
+		private readonly ItemsViewModel _viewModel;
 
 		public ItemsPage()
 		{
@@ -43,6 +43,28 @@ namespace StatisticsCollection.Views
 
 			if (_viewModel.Items.Count == 0)
 				_viewModel.LoadItemsCommand.Execute(null);
+		}
+
+		public void OnEdit(object sender, EventArgs e)
+		{
+			MenuItem mi = ((MenuItem)sender);
+			Item item = ((Item)mi.CommandParameter);
+		}
+
+		public async void OnDelete(object sender, EventArgs e)
+		{
+			MenuItem mi = ((MenuItem)sender);
+			Item item = ((Item)mi.CommandParameter);
+			bool isConfirmed = await DisplayAlert(
+				"Удаление",
+				$"Удалить {item.Date.ToString("g")} - {item.Value}?",
+				"Да",
+				"Нет");
+
+			if (isConfirmed)
+			{
+				_viewModel.DeleteItemCommand.Execute(item);
+			}
 		}
 	}
 }
