@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StatisticsCollection.Services
 {
-	public class MockDataStore : IDataStore<Item>
+	public class DataStore : IDataStore<Item>
 	{
 		private static async Task<SQLiteAsyncConnection> GetDatabaseConnection()
 		{
