@@ -18,7 +18,7 @@ namespace StatisticsCollection.ViewModels
 
 		public ItemsViewModel()
 		{
-			Title = "Browse";
+			Title = "Список";
 			Items = new ObservableCollection<Item>();
 
 			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
