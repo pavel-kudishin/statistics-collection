@@ -36,10 +36,10 @@ namespace StatisticsCollection.ViewModels
 			if (IsBusy)
 				return;
 
-			IsBusy = true;
-
 			try
 			{
+				IsBusy = true;
+
 				Items.Clear();
 				IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
 				List<Item> list = items.ToList();
@@ -93,10 +93,10 @@ namespace StatisticsCollection.ViewModels
 			if (IsBusy)
 				return;
 
-			IsBusy = true;
-
 			try
 			{
+				IsBusy = true;
+
 				bool result = await DataStore.DeleteItemAsync(item.Id);
 			}
 			catch (Exception ex)

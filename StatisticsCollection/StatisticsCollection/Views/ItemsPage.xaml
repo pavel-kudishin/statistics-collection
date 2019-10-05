@@ -25,6 +25,44 @@
 				IsRefreshing="{Binding IsBusy, Mode=OneWay}"
 				CachingStrategy="RecycleElement"
 				ItemSelected="OnItemSelected">
+			<ListView.Header>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="37*"></ColumnDefinition>
+						<ColumnDefinition Width="18*"></ColumnDefinition>
+						<ColumnDefinition Width="15*"></ColumnDefinition>
+						<ColumnDefinition Width="15*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Label Text="Дата"
+							HorizontalOptions="Fill"
+							Grid.Column="0"
+							FontSize="Medium"
+							HorizontalTextAlignment="Center"
+							VerticalTextAlignment="Center"
+							/>
+					<Label Text="Показатель"
+							HorizontalOptions="Fill"
+							Grid.Column="1"
+							FontSize="Medium"
+							HorizontalTextAlignment="Center"
+							VerticalTextAlignment="Center"
+							/>
+					<Label Text="Изменение"
+							HorizontalOptions="Fill"
+							Grid.Column="2"
+							FontSize="Medium"
+							HorizontalTextAlignment="Center"
+							VerticalTextAlignment="Center"
+							/>
+					<Label Text="За день"
+							HorizontalOptions="Fill"
+							Grid.Column="3"
+							FontSize="Medium"
+							HorizontalTextAlignment="Center"
+							VerticalTextAlignment="Center"
+							/>
+				</Grid>
+			</ListView.Header>
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<ViewCell>
@@ -36,35 +74,38 @@
 									CommandParameter="{Binding .}"
 									Text="Delete" IsDestructive="True" />
 						</ViewCell.ContextActions>
-						<StackLayout Padding="10" Orientation="Horizontal">
+						<Grid Padding="3">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="37*"></ColumnDefinition>
+								<ColumnDefinition Width="18*"></ColumnDefinition>
+								<ColumnDefinition Width="15*"></ColumnDefinition>
+								<ColumnDefinition Width="15*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
 							<Label
+								Grid.Column="0"
 								Text="{Binding Date, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
 								Style="{DynamicResource ListItemTextStyle}"
+								Margin="1"
 								FontSize="Medium" />
 							<Label
-								Text="-"
-								Style="{DynamicResource ListItemTextStyle}"
-								FontSize="Medium" />
-							<Label
+								Grid.Column="1"
 								Text="{Binding Value}"
-								WidthRequest="60"
 								Style="{DynamicResource ListItemTextStyle}"
+								Margin="1"
 								FontSize="Medium" />
 							<Label
-								Text="-"
-								Style="{DynamicResource ListItemTextStyle}"
-								FontSize="Medium" />
-							<Label
+								Grid.Column="2"
 								Text="{Binding Change}"
-								WidthRequest="48"
 								Style="{DynamicResource ListItemTextStyle}"
+								Margin="1"
 								FontSize="Medium" />
 							<Label
+								Grid.Column="3"
 								Text="{Binding DailyAverageChange}"
-								WidthRequest="40"
 								Style="{DynamicResource ListItemTextStyle}"
+								Margin="1"
 								FontSize="Medium" />
-						</StackLayout>
+						</Grid>
 					</ViewCell>
 				</DataTemplate>
 			</ListView.ItemTemplate>

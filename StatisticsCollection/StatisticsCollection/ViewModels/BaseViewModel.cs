@@ -12,7 +12,7 @@ namespace StatisticsCollection.ViewModels
 	{
 		public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
-		private bool _isBusy = false;
+		private bool _isBusy;
 		private string _title = string.Empty;
 
 		public bool IsBusy
