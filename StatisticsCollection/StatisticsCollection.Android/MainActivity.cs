@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Environment = System.Environment;
@@ -15,7 +15,7 @@ using Platform = Xamarin.Essentials.Platform;
 namespace StatisticsCollection.Droid
 {
 	[Activity(Label = "StatisticsCollection", Icon = "@mipmap/icon",
-		Theme = "@style/MainTheme", MainLauncher = true,
+		Theme = "@style/MainTheme",
 		ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : FormsAppCompatActivity
 	{
