@@ -47,7 +47,21 @@
 								FontSize="Medium" />
 							<Label
 								Text="{Binding Value}"
-								WidthRequest="150"
+								WidthRequest="60"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
+							<Label
+								Text="-"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
+							<Label
+								Text="{Binding Change}"
+								WidthRequest="48"
+								Style="{DynamicResource ListItemTextStyle}"
+								FontSize="Medium" />
+							<Label
+								Text="{Binding DailyAverageChange}"
+								WidthRequest="40"
 								Style="{DynamicResource ListItemTextStyle}"
 								FontSize="Medium" />
 						</StackLayout>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -41,7 +42,15 @@ namespace StatisticsCollection.ViewModels
 			{
 				Items.Clear();
 				IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
-				foreach (Item item in items)
+				List<Item> list = items.ToList();
+				for (int i = list.Count - 2; i >= 0; i--)
+				{
+					Item item = list[i];
+					item.Change = item.Value - list[i + 1].Value;
+					item.DailyAverageChange = GetDailyAverageChange(i, list);
+				}
+
+				foreach (Item item in list)
 				{
 					Items.Add(item);
 				}
@@ -54,6 +63,29 @@ namespace StatisticsCollection.ViewModels
 			{
 				IsBusy = false;
 			}
+		}
+
+		private static decimal? GetDailyAverageChange(int i, IReadOnlyList<Item> list)
+		{
+			Item item = list[i];
+			for (int j = i + 1; j < list.Count; j++)
+			{
+				double totalDays = (item.Date - list[j].Date).TotalDays;
+				if (totalDays < 1)
+				{
+					continue;
+				}
+
+				decimal? change = item.Value - list[j].Value;
+				if (change.HasValue)
+				{
+					return Math.Round(change.Value / (decimal) totalDays, 1);
+				}
+
+				return null;
+			}
+
+			return null;
 		}
 
 		private async Task ExecuteDeleteItemCommand(Item item)
