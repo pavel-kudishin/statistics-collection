@@ -26,6 +26,7 @@ namespace StatisticsCollection.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::StatisticsCollection.Droid.Resource.String.library_name;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::StatisticsCollection.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::StatisticsCollection.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::StatisticsCollection.Droid.Resource.Attribute.font;
@@ -7802,6 +7803,9 @@ namespace StatisticsCollection.Droid
 			
 			// aapt resource value: 0x7f0c0046
 			public const int hide_bottom_view_on_scroll_behavior = 2131492934;
+			
+			// aapt resource value: 0x7f0c004e
+			public const int library_name = 2131492942;
 			
 			// aapt resource value: 0x7f0c0000
 			public const int mr_button_content_description = 2131492864;

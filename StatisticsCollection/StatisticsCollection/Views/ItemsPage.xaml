@@ -13,6 +13,7 @@
 
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+		<ToolbarItem Text="Share" Clicked="ShareItems_Clicked" />
 	</ContentPage.ToolbarItems>
 
 	<StackLayout>

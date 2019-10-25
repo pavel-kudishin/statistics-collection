@@ -1,7 +1,9 @@
-﻿using StatisticsCollection.Models;
+﻿using Newtonsoft.Json;
+using StatisticsCollection.Models;
 using StatisticsCollection.ViewModels;
 using System;
 using System.ComponentModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace StatisticsCollection.Views
@@ -65,6 +67,17 @@ namespace StatisticsCollection.Views
 			{
 				_viewModel.DeleteItemCommand.Execute(item);
 			}
+		}
+
+		private async void ShareItems_Clicked(object sender, EventArgs e)
+		{
+			string serializedObject = JsonConvert.SerializeObject(_viewModel.Items);
+
+			await Share.RequestAsync(new ShareTextRequest
+			{
+				Text = serializedObject,
+				Title = "Поделиться"
+			});
 		}
 	}
 }

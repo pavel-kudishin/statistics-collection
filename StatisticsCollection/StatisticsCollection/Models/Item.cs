@@ -44,7 +44,7 @@ namespace StatisticsCollection.Models
 
 		public decimal? Change { get; set; }
 
-		public decimal? DailyAverageChange { get; set; }
+		public decimal DailyAverageChange { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

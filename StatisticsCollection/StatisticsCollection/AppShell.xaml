@@ -34,6 +34,9 @@
 		<Tab Title="Список" Icon="tab_feed.png">
 			<ShellContent ContentTemplate="{DataTemplate local:ItemsPage}" />
 		</Tab>
+		<Tab Title="График" Icon="tab_feed.png">
+			<ShellContent ContentTemplate="{DataTemplate local:ChartPage}" />
+		</Tab>
 		<Tab Title="About" Icon="tab_about.png">
 			<ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
 		</Tab>
