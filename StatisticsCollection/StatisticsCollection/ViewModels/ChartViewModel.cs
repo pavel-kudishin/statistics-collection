@@ -30,6 +30,11 @@ namespace StatisticsCollection.ViewModels
 				List<Item> list = items.ToList();
 
 				Entries = new List<Entry>();
+				if (list.Count == 0)
+				{
+					return;
+				}
+
 				DateTime startDate = list[list.Count - 1].Date;
 				DateTime endDate = list[0].Date;
 				double totalMinutes = (endDate - startDate).TotalMinutes;

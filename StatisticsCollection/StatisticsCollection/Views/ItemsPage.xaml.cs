@@ -79,5 +79,10 @@ namespace StatisticsCollection.Views
 				Title = "Поделиться"
 			});
 		}
+
+		private void ImportItems_Clicked(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

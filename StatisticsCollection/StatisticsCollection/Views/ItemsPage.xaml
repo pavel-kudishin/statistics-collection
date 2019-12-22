@@ -14,6 +14,7 @@
 	<ContentPage.ToolbarItems>
 		<ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
 		<ToolbarItem Text="Share" Clicked="ShareItems_Clicked" />
+		<ToolbarItem Text="Import" Clicked="ImportItems_Clicked" />
 	</ContentPage.ToolbarItems>
 
 	<StackLayout>
