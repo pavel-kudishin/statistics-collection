@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Plugin.FilePicker;
+using Plugin.FilePicker.Abstractions;
 using StatisticsCollection.Models;
 using StatisticsCollection.ViewModels;
 using System;
@@ -80,9 +82,34 @@ namespace StatisticsCollection.Views
 			});
 		}
 
-		private void ImportItems_Clicked(object sender, EventArgs e)
+		private async void ImportItems_Clicked(object sender, EventArgs e)
 		{
+			try
+			{
+				FileData fileData = await CrossFilePicker.Current.PickFile();
+				if (fileData == null)
+				{
+					return; // user canceled file picking
+				}
 
+				string fileName = fileData.FileName;
+				string contents = System.Text.Encoding.UTF8.GetString(fileData.DataArray);
+
+				bool isConfirmed = await DisplayAlert(
+					"Импорт",
+					$"Импортировать {fileName}?",
+					"Да",
+					"Нет");
+
+				if (isConfirmed)
+				{
+					Item[] items = JsonConvert.DeserializeObject<Item[]>(contents);
+					_viewModel.ImportItemsCommand.Execute(items);
+				}
+			}
+			catch (Exception ex)
+			{
+			}
 		}
 	}
 }

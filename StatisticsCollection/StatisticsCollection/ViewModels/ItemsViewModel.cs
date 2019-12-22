@@ -15,14 +15,16 @@ namespace StatisticsCollection.ViewModels
 		public ObservableCollection<Item> Items { get; set; }
 		public Command LoadItemsCommand { get; set; }
 		public Command DeleteItemCommand { get; set; }
+		public Command ImportItemsCommand { get; set; }
 
 		public ItemsViewModel()
 		{
 			Title = "Список";
 			Items = new ObservableCollection<Item>();
 
-			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-			DeleteItemCommand = new Command(async item => await ExecuteDeleteItemCommand((Item)item));
+			LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommandAsync());
+			DeleteItemCommand = new Command(async item => await ExecuteDeleteItemCommandAsync((Item)item));
+			ImportItemsCommand = new Command(async items => await ExecuteImportItemsCommandAsync((Item[])items));
 
 			MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
 			{
@@ -31,7 +33,33 @@ namespace StatisticsCollection.ViewModels
 			});
 		}
 
-		private async Task ExecuteLoadItemsCommand()
+		private async Task ExecuteImportItemsCommandAsync(Item[] items)
+		{
+			if (IsBusy)
+				return;
+
+			try
+			{
+				IsBusy = true;
+
+				foreach (Item item in items)
+				{
+					await DataStore.AddItemAsync(item);
+				}
+
+				await ExecuteLoadItemsCommandAsync();
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		private async Task ExecuteLoadItemsCommandAsync()
 		{
 			if (IsBusy)
 				return;
@@ -140,7 +168,7 @@ namespace StatisticsCollection.ViewModels
 			return null;
 		}
 
-		private async Task ExecuteDeleteItemCommand(Item item)
+		private async Task ExecuteDeleteItemCommandAsync(Item item)
 		{
 			if (IsBusy)
 				return;
@@ -160,7 +188,7 @@ namespace StatisticsCollection.ViewModels
 				IsBusy = false;
 			}
 
-			await ExecuteLoadItemsCommand();
+			await ExecuteLoadItemsCommandAsync();
 		}
 	}
 }
